@@ -61,7 +61,7 @@ public class Adventure
         
         Enemy enemy = null;
         isValid = false;
-        int initializeFightCount;
+        int initializeFightCount = 0;
         
         System.out.print("\nInput the name of the enemy you wish to fight," +
                          "\nor input 'skip' to start a new game: ");
@@ -98,7 +98,7 @@ public class Adventure
             {
                 System.out.print("\nPlease input the name of the enemy you wish to fight," +
                                  "\nor input 'skip' to start a new game: ");
-                String fightThis = input.nextLine();
+                fightThis = input.nextLine();
             }
         }
         
@@ -121,6 +121,7 @@ public class Adventure
             if (fightCount == 2)
             {
                 enemy = new Enemy("Ronin", 75);
+                player.resetPlayerHealth();
                 System.out.println("\nFlick collapses to the ground. As they do, you hear the announcer say:" +
                                    "\n\"And we have a winner! " + player.getPlayerName() + " lives to see another day!\"" +
                                    "\nYou are given the rest of the day to rest. But, tomorrow..." +
@@ -130,6 +131,7 @@ public class Adventure
             else if (fightCount == 3)
             {
                 enemy = new Enemy("Drake", 100);
+                player.resetPlayerHealth();
                 System.out.println("\nRonin collapses to the ground. As they do, you once again hear the announcer say:" +
                                    "\n\"" + player.getPlayerName() + " has once again bested the competition!\"" +
                                    "\nLike before, the rest of the day is yours. Fast forward to the next day..." +
@@ -138,6 +140,7 @@ public class Adventure
             else if (fightCount == 4)
             {
                 enemy = new Enemy("Xander", 125);
+                player.resetPlayerHealth();
                 System.out.println("\nDrake collapses to the ground. As they do, the announcer routinely says:" +
                                    "\n\"A winner has once again been decided! " + player.getPlayerName() + " will be moving on to the next round!\"" +
                                    "\nOnce again, you spend the rest of the day recovering from your last encounter. Before you know it, the next dawn arises..." +  
@@ -146,6 +149,7 @@ public class Adventure
             else if (fightCount == 5)
             {
                 enemy = new Enemy("Aethis", 150);
+                player.resetPlayerHealth();
                 System.out.println("\nXander collapses to the ground. As they do, the announcer once again routinely says:" +
                                    "\n\"For winning four consecutive fights, " + player.getPlayerName() + " will now be moving on to the final round!\"" +
                                    "\nAfter spending the rest of the day preparing for the most formidable foe yet, it is time for..." +
@@ -244,21 +248,54 @@ public class Adventure
                                            "\nHealth remaining: " + player.getPlayerHealth() +
                                            "\nClass: " + player.getPlayerClass() + 
                                            "\nHidden from " + enemy.getEnemyName() + ": " + player.isPlayerHidden() + 
-                                           "\n" + enemy.getEnemyName() + " is hidden from you: " + enemy.isEnemyHidden());
+                                           "\n" + enemy.getEnemyName() + " is hidden from you: " + enemy.isEnemyHidden() +
+                                           "\n" + enemy.getEnemyName() + " is prepared to dodge incoming attacks: " + enemy.isEnemyDodging());
                         System.out.print("\nPlease input attack, dodge, hide, search, rest, help, or info: ");
                         playerAction = input.nextLine();
                     }
-                    else if (playerAction.equalsIgnoreCase("UpUpDownDownLeftRightLeftRightBA")
+                    else if (playerAction.equalsIgnoreCase("UpUpDownDownLeftRightLeftRightBA"))
                     {
-                        isValid = false;
-                        System.out.println("\nCheat code inputted. Please now input a number." +
-                                           "\nIf a positive number is inputted, your character will heal that much health (Up to their max health)." +
-                                           "\nIf a negative number is inputted, " + enemy.getEnemyName() + " will lose that much health." +
-                                           "\nIf zero is entered, nothing happens. You can also input 'help' to display this message again.");
+                        boolean isValid2 = false;
+                        System.out.print("\nCheat code inputted. Please now input an integer." +
+                                           "\nIf a positive integer is inputted, your character will heal that much health (Up to their max health)." +
+                                           "\nIf a negative integer is inputted, " + enemy.getEnemyName() + " will lose that much health." +
+                                           "\nIf zero is entered, nothing happens. You can also input 'help' to display this message again." + 
+                                           "\nInput: ");
+                        playerAction = input.nextLine();
                         
-                        while (isValid == false)
+                        while (isValid2 == false)
                         {
-                            
+                            if (isInteger(playerAction))
+                            {
+                                if (Integer.parseInt(playerAction) > 0)
+                                {
+                                    player.playerCheat(Integer.parseInt(playerAction));
+                                }
+                                else if (Integer.parseInt(playerAction) < 0)
+                                {
+                                    enemy.enemyCheat(Integer.parseInt(playerAction));    
+                                }
+                                
+                                isValid2 = true;
+                                if (enemy.getEnemyHealth() < 1)
+                                {
+                                    isValid = true;
+                                }
+                            }
+                            else if (playerAction.equalsIgnoreCase("Help"))
+                            {
+                                System.out.print("\nPlease input an integer." +
+                                                 "\nIf a positive integer is inputted, your character will heal that much health (Up to their max health)." +
+                                                 "\nIf a negative integer is inputted, " + enemy.getEnemyName() + " will lose that much health." +
+                                                 "\nIf zero is entered, nothing happens." + 
+                                                 "\nInput: ");
+                                playerAction = input.nextLine();
+                            }
+                            else
+                            {
+                                System.out.print("\nPlease input an integer: ");
+                                playerAction = input.nextLine();
+                            }
                         }
                     }
                     else
@@ -325,5 +362,18 @@ public class Adventure
         
         System.out.println("\nAethis collapses to the ground. As they do, the announcer says:" + 
                            "\n\"Congratulations, " + player.getPlayerName() + "! You have defeated every opponnent thrown your way!\"");
+    }
+    
+    public static boolean isInteger (String potentialInteger)
+    {
+        try
+        {
+            Integer.parseInt(potentialInteger);
+            return true;
+        }
+        catch (NumberFormatException error)
+        {
+            return false;    
+        }
     }
 }
