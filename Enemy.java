@@ -34,7 +34,7 @@ public class Enemy
     {
         if (enemyIsDodging == false || Math.random() <= 0.5)
         {
-            if ((playerHidden == true) && (playerClass == "Gladiator"))
+            if ((playerHidden == true) && (playerClass.equalsIgnoreCase("Gladiator")))
             {
                 enemyDamageTaken = (int) (Math.random() * 150) + 1;
             }
@@ -42,7 +42,7 @@ public class Enemy
             {
                 enemyDamageTaken = (int) (Math.random() * 100) + 1;
             }
-            else if (playerClass == "Gladiator")
+            else if (playerClass.equalsIgnoreCase("Gladiator"))
             {
                 enemyDamageTaken = (int) (Math.random() * 75) + 1;
             }
@@ -63,6 +63,11 @@ public class Enemy
     {
         enemyIsDodging = true;
         System.out.println("\n" + enemyName + " is prepared to dodge incoming attacks!");
+    }
+    
+    public boolean isEnemyDodging()
+    {
+        return enemyIsDodging;
     }
     
     public void resetEnemyDodge()
@@ -95,12 +100,12 @@ public class Enemy
     
     public boolean searchForPlayer(String playerClass)
     {
-        if ((Math.random() <= 0.25) && (playerClass == "Specter"))
+        if ((Math.random() <= 0.25) && (playerClass.equalsIgnoreCase("Specter")))
         {
             System.out.println("\n" + enemyName + " has spotted you!");
             return true;
         }
-        else if ((Math.random() <= 0.5) && !(playerClass == "Specter"))
+        else if ((Math.random() <= 0.5) && !(playerClass.equalsIgnoreCase("Specter")))
         {
             System.out.println("\n" + enemyName + " has spotted you!");
             return true;
@@ -122,7 +127,7 @@ public class Enemy
         System.out.println("\n" + enemyName + " rested, regaining " + enemyHealAmount + " health.");
     }
     
-    public void enemeyCheat(int enemyDamageAmount)
+    public void enemyCheat(int enemyDamageAmount)
     {
         enemyHealth = enemyHealth + enemyDamageAmount;
     }
