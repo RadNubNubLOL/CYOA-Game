@@ -37,7 +37,7 @@ public class Player
     
     public void resetPlayerHealth()
     {
-        if (!(playerClass == "Gladiator"))
+        if (!(playerClass.equalsIgnoreCase("Gladiator")))
         {
             playerHealth = 100;
         }
@@ -49,12 +49,12 @@ public class Player
     
     public void playerIsAttacked(int damageReceived, String enemyName)
     {
-        if ((playerIsDodging == true) && (playerClass == "Specter") && (Math.random() <= 0.25))
+        if ((playerIsDodging == true) && (playerClass.equalsIgnoreCase("Specter")) && (Math.random() <= 0.25))
         {
             playerHealth = playerHealth - damageReceived;
             System.out.println("\nYou got attacked, and took " + damageReceived + " damage.");
         }
-        else if (((playerIsDodging == false) || (Math.random() <= 0.5)) && !((playerClass == "Specter") && (playerIsDodging == true)))
+        else if (((playerIsDodging == false) || (Math.random() <= 0.5)) && !((playerClass.equalsIgnoreCase("Specter")) && (playerIsDodging == true)))
         {
             playerHealth = playerHealth - damageReceived;
             System.out.println("\nYou got attacked, and took " + damageReceived + " damage.");
@@ -78,12 +78,12 @@ public class Player
     
     public void playerHide(String enemyName)
     {
-        if ((Math.random() <= 0.75) && (playerClass == "Specter"))
+        if ((Math.random() <= 0.75) && (playerClass.equalsIgnoreCase("Specter")))
         {
             playerIsHidden = true;
             System.out.println("\nYou are now hidden from " + enemyName + "'s view.");
         }
-        else if ((Math.random() <= 0.5) && !(playerClass == "Specter"))
+        else if ((Math.random() <= 0.5) && !(playerClass.equalsIgnoreCase("Specter")))
         {
             playerIsHidden = true;
             System.out.println("\nYou are now hidden from " + enemyName + "'s view.");
@@ -106,7 +106,7 @@ public class Player
     
     public void playerRest()
     {
-        if (playerClass.equals("Guardian"))
+        if (playerClass.equalsIgnoreCase("Guardian"))
         {
             playerHealAmount = (int) (Math.random() * 50) + 1;
         }
@@ -115,7 +115,7 @@ public class Player
             playerHealAmount = (int) (Math.random() * 25) + 1;
         }
         playerHealth = playerHealth + playerHealAmount;
-        if ((playerHealth > 100) && !(playerClass == "Gladiator"))
+        if ((playerHealth > 100) && !(playerClass.equalsIgnoreCase("Gladiator")))
         {
             playerHealth = 100;
         }
@@ -129,5 +129,13 @@ public class Player
     public void playerCheat(int playerHealAmount)
     {
         playerHealth = playerHealth + playerHealAmount;
+        if ((playerHealth > 100) && !(playerClass.equalsIgnoreCase("Gladiator")))
+        {
+            playerHealth = 100;
+        }
+        else if (playerHealth > 125)
+        {
+            playerHealth = 125;
+        }
     }
 }
