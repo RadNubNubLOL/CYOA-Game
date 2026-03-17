@@ -56,7 +56,7 @@ public class Adventure
         
         if (player.getPlayerClass().equalsIgnoreCase("Gladiator"))
         {
-            player.setGladiatorHealth();
+            player.resetPlayerHealth();
         }
         
         Enemy enemy = null;
@@ -113,7 +113,7 @@ public class Adventure
         String playerAction;
         int randomInt;
         int enemyDamage;
-        int eHealAmount;
+        int enemyHealAmount;
         enemy = new Enemy("Flick", 50);
         
         for (int fightCount = initializeFightCount; fightCount <= 5; fightCount++)
@@ -316,11 +316,11 @@ public class Adventure
                     {
                         if (enemy.isEnemyHidden() == false)
                         {
-                            enemyDamage = (int) (Math.random() * 25 * fightCount) + 1;
+                            enemyDamage = (int) (Math.random() * ((15 * fightCount) + 1)) + 5 * fightCount;
                         }
                         else
                         {
-                            enemyDamage = (int) (Math.random() * 50 * fightCount) + 1;
+                            enemyDamage = (int) (Math.random() * ((30 * fightCount) + 1)) + 10 * fightCount;
                         }
                         player.playerIsAttacked(enemyDamage, enemy.getEnemyName());
                         if (player.getPlayerHealth() < 1)
@@ -332,7 +332,7 @@ public class Adventure
                         enemy.resetEnemyHidden();
                         isValid = true;
                         }
-                        else if (randomInt == 2)
+                        else if (randomInt == 2 && enemy.isEnemyHidden() == false)
                         {
                             enemy.enemyDodge();
                             isValid = true;
@@ -352,8 +352,8 @@ public class Adventure
                     }
                     else if (randomInt == 5 && enemy.getEnemyHealth() < (50 + (25 * (fightCount - 1))))
                     {
-                        eHealAmount = (int) (Math.random() * 12 * fightCount) + 1;
-                        enemy.enemyRest(eHealAmount, fightCount);
+                        enemyHealAmount = (int) (Math.random() * ((7 * fightCount) + 1)) + 3 * fightCount;
+                        enemy.enemyRest(enemyHealAmount, fightCount);
                         isValid = true;
                     }
                 }
