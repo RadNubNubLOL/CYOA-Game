@@ -36,19 +36,19 @@ public class Enemy
         {
             if ((playerHidden == true) && (playerClass.equalsIgnoreCase("Gladiator")))
             {
-                enemyDamageTaken = (int) (Math.random() * 150) + 1;
+                enemyDamageTaken = (int) (Math.random() * 91) + 30;
             }
             else if (playerHidden == true)
             {
-                enemyDamageTaken = (int) (Math.random() * 100) + 1;
+                enemyDamageTaken = (int) (Math.random() * 61) + 20;
             }
             else if (playerClass.equalsIgnoreCase("Gladiator"))
             {
-                enemyDamageTaken = (int) (Math.random() * 75) + 1;
+                enemyDamageTaken = (int) (Math.random() * 46) + 15;
             }
             else
             {
-                enemyDamageTaken = (int) (Math.random() * 50) + 1;
+                enemyDamageTaken = (int) (Math.random() * 31) + 10;
             }
             enemyHealth = enemyHealth - enemyDamageTaken;
             System.out.println("\nYou dealt " + enemyDamageTaken + " damage to " + enemyName + ".");
