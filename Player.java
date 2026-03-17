@@ -25,11 +25,6 @@ public class Player
         return playerHealth;
     }
     
-    public void setGladiatorHealth()
-    {
-        playerHealth = 125;
-    }
-    
     public String getPlayerClass()
     {
         return playerClass;
@@ -108,11 +103,11 @@ public class Player
     {
         if (playerClass.equalsIgnoreCase("Guardian"))
         {
-            playerHealAmount = (int) (Math.random() * 50) + 1;
+            playerHealAmount = (int) (Math.random() * 31) + 10;
         }
         else
         {
-            playerHealAmount = (int) (Math.random() * 25) + 1;
+            playerHealAmount = (int) (Math.random() * 16) + 5;
         }
         playerHealth = playerHealth + playerHealAmount;
         if ((playerHealth > 100) && !(playerClass.equalsIgnoreCase("Gladiator")))
