@@ -34,7 +34,11 @@ public class Enemy
     {
         if (enemyIsDodging == false || Math.random() <= 0.5)
         {
-            if ((playerHidden == true) && (playerClass.equalsIgnoreCase("Gladiator")))
+            if ((Math.random() <= 0.05) && (playerClass.equalsIgnoreCase("Goku")))
+            {
+                enemyDamageTaken = 9001;    
+            }
+            else if ((playerHidden == true) && (playerClass.equalsIgnoreCase("Gladiator")))
             {
                 enemyDamageTaken = (int) (Math.random() * 91) + 30;
             }
@@ -122,6 +126,7 @@ public class Enemy
         enemyHealth = enemyHealth + enemyHealAmount;
         if (enemyHealth > (50 + (25 * (fightCount - 1))))
         {
+            enemyHealAmount = enemyHealAmount - (enemyHealth - (50 + (25 * (fightCount - 1))));
             enemyHealth = (50 + (25 * (fightCount - 1)));
         }
         System.out.println("\n" + enemyName + " rested, regaining " + enemyHealAmount + " health.");
