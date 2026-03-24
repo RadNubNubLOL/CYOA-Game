@@ -27,13 +27,13 @@ public class Adventure
         
         isValid = false;
         
-        System.out.print("\nChoose your character's class (Either Guardian, Gladiator, or Specter." +
-                         "\nYou can also type 'help' to learn more about these classes): ");
+        System.out.print("\nChoose your character's class (Either Guardian, Gladiator, Specter, or Goku)" +
+                         "\n(You can also type 'help' to learn more about these classes): ");
         String tempClass = input.nextLine();
         
         while (isValid == false)
         {
-            if ((tempClass.equalsIgnoreCase("Guardian")) || (tempClass.equalsIgnoreCase("Gladiator")) || (tempClass.equalsIgnoreCase("Specter")))
+            if ((tempClass.equalsIgnoreCase("Guardian")) || (tempClass.equalsIgnoreCase("Gladiator")) || (tempClass.equalsIgnoreCase("Specter")) || (tempClass.equalsIgnoreCase("Goku")))
             {
                 isValid = true;
             }
@@ -41,13 +41,15 @@ public class Adventure
             {
                 System.out.println("\nGuardian: Your character learns healing magic. The rest move will now heal more than usual." +
                                    "\nGladiator: Your character is exceptionally skilled in combat. Max health and damage increases." + 
-                                   "\nSpecter: Your character is agile and nimble. The dodge and hide moves become more effective.");
-                System.out.print("\nPlease input Guardian, Gladiator, Specter, or help: ");
+                                   "\nSpecter: Your character is agile and nimble. The dodge and hide moves become more effective." +
+                                   "\nGoku: Your character gains Goku's powers, to a limited degree." + 
+                                   "\nWhen you attack, there is a small chance these powers will be unleashed.");
+                System.out.print("\nPlease input Guardian, Gladiator, Specter, Goku, or help: ");
                 tempClass = input.nextLine();
             }
             else
             {
-                System.out.print("\nPlease input Guardian, Gladiator, Specter, or help: ");
+                System.out.print("\nPlease input Guardian, Gladiator, Specter, Goku, or help: ");
                 tempClass = input.nextLine();
             }
         }
