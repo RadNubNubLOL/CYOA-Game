@@ -112,10 +112,12 @@ public class Player
         playerHealth = playerHealth + playerHealAmount;
         if ((playerHealth > 100) && !(playerClass.equalsIgnoreCase("Gladiator")))
         {
+            playerHealAmount = playerHealAmount - (playerHealth - 100);
             playerHealth = 100;
         }
         else if (playerHealth > 125)
         {
+            playerHealAmount = playerHealAmount - (playerHealth - 125);
             playerHealth = 125;
         }
         System.out.println("\nYou rested, regaining " + playerHealAmount + " health.");
