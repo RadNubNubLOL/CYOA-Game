@@ -40,8 +40,10 @@ public class Adventure
             else if (tempClass.equalsIgnoreCase("Help"))
             {
                 System.out.println("\nGuardian: Your character learns healing magic. The rest move will now heal more than usual." +
+                                   "\nIn addition, your character will also passively regain a small amount of health each turn." +
                                    "\nGladiator: Your character is exceptionally skilled in combat. Max health and damage increases." + 
                                    "\nSpecter: Your character is agile and nimble. The dodge and hide moves become more effective." +
+                                   "\nIn addition, your character also has a small chance to dodge attacks even without using the dodge move." +
                                    "\nGoku: Your character gains Goku's powers, to a limited degree." + 
                                    "\nWhen you attack, there is a small chance these powers will be unleashed.");
                 System.out.print("\nPlease input Guardian, Gladiator, Specter, Goku, or help: ");
@@ -358,6 +360,11 @@ public class Adventure
                         enemy.enemyRest(enemyHealAmount, fightCount);
                         isValid = true;
                     }
+                }
+                
+                if ((player.getPlayerHealth() < 100) && (player.getPlayerClass().equalsIgnoreCase("Guardian")))
+                {
+                    player.guardianPassiveHeal();
                 }
             }
         }
