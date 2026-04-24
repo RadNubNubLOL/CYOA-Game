@@ -44,12 +44,16 @@ public class Player
     
     public void playerIsAttacked(int damageReceived, String enemyName)
     {
-        if ((playerIsDodging == true) && (playerClass.equalsIgnoreCase("Specter")) && (Math.random() <= 0.25))
+        if ((playerIsDodging == false) && (playerClass.equalsIgnoreCase("Specter")) && (Math.random() >= 0.9))
+        {
+            System.out.println("\nYou dodged " + enemyName + "'s attack!");    
+        }
+        else if ((playerIsDodging == true) && (playerClass.equalsIgnoreCase("Specter")) && (Math.random() >= 0.75))
         {
             playerHealth = playerHealth - damageReceived;
             System.out.println("\nYou got attacked, and took " + damageReceived + " damage.");
         }
-        else if (((playerIsDodging == false) || (Math.random() <= 0.5)) && !((playerClass.equalsIgnoreCase("Specter")) && (playerIsDodging == true)))
+        else if (((playerIsDodging == false) || ((Math.random() >= 0.5) && !(playerClass.equalsIgnoreCase("Specter")))))
         {
             playerHealth = playerHealth - damageReceived;
             System.out.println("\nYou got attacked, and took " + damageReceived + " damage.");
@@ -121,6 +125,19 @@ public class Player
             playerHealth = 125;
         }
         System.out.println("\nYou rested, regaining " + playerHealAmount + " health.");
+    }
+    
+    public void guardianPassiveHeal()
+    {
+        playerHealAmount = (int) (Math.random() * 8) + 3; 
+        playerHealth = playerHealth + playerHealAmount;
+        
+        if (playerHealth > 100)
+        {
+            playerHealAmount = playerHealAmount - (playerHealth - 100);
+            playerHealth = 100;
+        }
+        System.out.println("\nYou have regained " + playerHealAmount + " health.");
     }
     
     public void playerCheat(int playerHealAmount)
